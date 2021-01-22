@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from xgboost import XGBClassifier
 import streamlit as st
 import pickle
 
