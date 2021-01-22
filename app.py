@@ -4,7 +4,7 @@ from xgboost import XGBClassifier
 import streamlit as st
 import pickle
 
-model = pickle.load(open('xgb_model','rb'))
+model = pickle.load(open('log_model','rb'))
 
 st.sidebar.title("Churn Probability of a Single Customer")
 
@@ -73,10 +73,10 @@ if st.checkbox("Churn Probability of Randomly Selected Customers"):
     
     st.markdown("### How many customers to be selected randomly?")
     number = st.selectbox("Please choose number of customers:", range(10,102,10))
-    random_df = new_df.sample(number)
-    model_df = pd.get_dummies(random_df, drop_first=True)
-    random_df["Churn Probability"] = [i[1] for i in model.predict_proba(model_df)]
-    st.table(random_df)
+    result_df = new_df.sample(number)
+    selected_df = pd.get_dummies(result_df, drop_first=True)
+    result_df["Churn Probability"] = [i[1] for i in model.predict_proba(selected_df)]
+    st.table(result_df)
     
 elif st.checkbox("Top Customers to Churn"):  
     
